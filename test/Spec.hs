@@ -1,0 +1,2 @@
+{-# LANGUAGE CPP #-}
+{-# OPTIONS_GHC -F -pgmF SYDTEST_DISCOVER #-}
