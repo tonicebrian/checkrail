@@ -72,8 +72,10 @@ library
   build-depends:
       aeson
     , base
+    , either
     , filepath
     , lens
+    , mtl
     , openapi3
     , optparse-simple
     , pretty-simple
@@ -132,8 +134,10 @@ executable checkrail-exe
       aeson
     , base
     , checkrail
+    , either
     , filepath
     , lens
+    , mtl
     , openapi3
     , optparse-simple
     , pretty-simple
@@ -192,8 +196,10 @@ test-suite checkrail-test
   build-depends:
       aeson
     , base
+    , either
     , filepath
     , lens
+    , mtl
     , openapi3
     , optparse-simple
     , pretty-simple

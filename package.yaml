@@ -20,8 +20,10 @@ description: Please see the README on Github at <https://github.com/tonicebrian/
 dependencies:
   - aeson
   - base
+  - either
   - filepath
   - lens
+  - mtl
   - optparse-simple
   - openapi3
   - pretty-simple
