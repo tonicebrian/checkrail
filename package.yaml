@@ -1,13 +1,12 @@
 name: checkrail
 version: 0.1.0.0
 github: tonicebrian/checkrail
-license: Apache2
+license: Apache-2.0
 author: Toni Cebrián
 maintainer: toni@tonicebrian.com
 
 extra-source-files:
   - README.md
-  - ChangeLog.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -26,6 +25,7 @@ dependencies:
   - optparse-simple
   - openapi3
   - pretty-simple
+  - text
   - yaml
 
 default-extensions:
@@ -92,6 +92,7 @@ executables:
       - checkrail
       - optparse-simple
       - pretty-simple
+      - text
 
     ghc-options:
       - -threaded

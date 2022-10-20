@@ -12,9 +12,9 @@ import Prelude
 data Language
   = Haskell
   | Purescript
+  deriving (Show, Read, Enum, Bounded)
 
 generate :: FilePath -> Language -> IO ()
 generate openApiFile lang = do
-  args <- getArgs
   openApi <- Y.decodeFileThrow openApiFile :: IO OpenApi
   mapM_ pPrint (openApi ^.. paths)
