@@ -22,11 +22,13 @@ dependencies:
   - base
   - either
   - filepath
+  - insert-ordered-containers
   - lens
   - mtl
   - optparse-simple
   - openapi3
   - pretty-simple
+  - shakespeare
   - text
   - yaml
 

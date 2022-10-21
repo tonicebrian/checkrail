@@ -1,6 +1,7 @@
 -- |
-module Checkrails where
+module Checkrail where
 
+import Checkrail.Purescript
 import Control.Lens
 import qualified Data.Aeson as Aeson
 import Data.Either.Combinators (mapLeft)
@@ -25,7 +26,6 @@ generate openApiFile fileFormat lang = do
   openApi <- case fileFormat of
     JSON -> (Aeson.eitherDecodeFileStrict openApiFile :: IO (Either String OpenApi))
     Yaml -> (Yaml.decodeFileEither openApiFile :: IO (Either Yaml.ParseException OpenApi)) <&> mapLeft show
-  putStrLn "El resultado es:"
   case openApi of
     Right oa -> case lang of
       Haskell -> generateHaskell oa
@@ -33,7 +33,4 @@ generate openApiFile fileFormat lang = do
     Left e -> pPrint e
 
 generateHaskell :: OpenApi -> IO ()
-generateHaskell _ = putStrLn "Parsed correctly"
-
-generatePurescript :: OpenApi -> IO ()
-generatePurescript _ = putStrLn "Parsed correctly"
+generateHaskell _ = error "Not implemented yet"

@@ -23,7 +23,10 @@ source-repository head
 
 library
   exposed-modules:
-      Checkrails
+      Checkrail
+      Checkrail.Client
+      Checkrail.Purescript
+      Checkrail.Purescript.Render
   other-modules:
       Paths_checkrail
   hs-source-dirs:
@@ -74,11 +77,13 @@ library
     , base
     , either
     , filepath
+    , insert-ordered-containers
     , lens
     , mtl
     , openapi3
     , optparse-simple
     , pretty-simple
+    , shakespeare
     , text
     , yaml
   default-language: Haskell2010
@@ -136,11 +141,13 @@ executable checkrail-exe
     , checkrail
     , either
     , filepath
+    , insert-ordered-containers
     , lens
     , mtl
     , openapi3
     , optparse-simple
     , pretty-simple
+    , shakespeare
     , text
     , yaml
   default-language: Haskell2010
@@ -198,11 +205,13 @@ test-suite checkrail-test
     , base
     , either
     , filepath
+    , insert-ordered-containers
     , lens
     , mtl
     , openapi3
     , optparse-simple
     , pretty-simple
+    , shakespeare
     , sydtest
     , sydtest-discover
     , text

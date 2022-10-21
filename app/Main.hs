@@ -1,6 +1,6 @@
 module Main where
 
-import Checkrails
+import Checkrail
 import qualified Data.Text as T
 import Options.Applicative.Simple
 import System.FilePath
