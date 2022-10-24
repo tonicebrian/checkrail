@@ -16,6 +16,7 @@ data HttpAction a
 
 data Client = Client
   { clientOperationId :: !Text,
-    templatedFilePath :: !FilePath
+    templatedFilePath :: !FilePath,
+    returnType :: !Text
   }
   deriving (Show)

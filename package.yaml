@@ -108,6 +108,7 @@ tests:
     main: Spec.hs
     source-dirs: test
     dependencies:
+      - checkrail
       - sydtest
       - sydtest-discover
 

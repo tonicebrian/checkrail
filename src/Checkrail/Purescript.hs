@@ -29,7 +29,8 @@ clientBuilder (fp, pi) =
     ( \(v, o) ->
         Client
           { clientOperationId = o ^. operationId . _Just,
-            templatedFilePath = fp
+            templatedFilePath = fp,
+            returnType = ""
           }
     )
     (catMaybes operations)

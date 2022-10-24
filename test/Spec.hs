@@ -1,2 +1,1 @@
-{-# LANGUAGE CPP #-}
-{-# OPTIONS_GHC -F -pgmF SYDTEST_DISCOVER #-}
+{-# OPTIONS_GHC -F -pgmF sydtest-discover #-}

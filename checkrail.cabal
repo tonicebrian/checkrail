@@ -156,6 +156,7 @@ test-suite checkrail-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Checkrail.Purescript.RenderSpec
       Paths_checkrail
   hs-source-dirs:
       test
@@ -203,6 +204,7 @@ test-suite checkrail-test
   build-depends:
       aeson
     , base
+    , checkrail
     , either
     , filepath
     , insert-ordered-containers

@@ -1,6 +1,6 @@
 {-# LANGUAGE QuasiQuotes #-}
 
-module Checkrail.Purescript.Render (renderClient) where
+module Checkrail.Purescript.Render where
 
 import Checkrail.Client
 import Data.Text (Text)
@@ -8,10 +8,10 @@ import qualified Data.Text as T
 import Text.Shakespeare.Text
 import Prelude
 
-renderClient Client {..} = qq
-  where
-    qq =
-      let bar = 23 :: Int
-       in [st|
-#{clientOperationId} :: MonadAff m => Text -> Text -> m ()
-                                   |]
+renderSignature Client {..} =
+  [st|#{clientOperationId} :: MonadAff m => String -> String -> m #{returnType}|]
+
+renderFunctionAndParams Client {..} =
+  [st|#{clientOperationId} |]
+
+renderClient = renderSignature

@@ -49,7 +49,6 @@ findPetById status = pure BadRequest
 
 main :: Effect Unit
 main = do
-  log "Hoooolas"
   launchAff_ do
     result <- AN.get RF.json "https://petstore3.swagger.io/api/v3/pet/findByStatus?status=available"
     liftEffect
