@@ -1,10 +1,11 @@
 {-# LANGUAGE PartialTypeSignatures #-}
 
-module Checkrail.Purescript (generatePurescript) where
+module Checkrail.Purescript (generatePurescript, builder) where
 
 import Checkrail.Client
 import Checkrail.Purescript.Render
 import Control.Lens
+import Control.Lens (Magnify (magnify))
 import Control.Monad.Reader
 import Data.Aeson
 import Data.HashMap.Strict.InsOrd (hashMap)
@@ -30,7 +31,8 @@ clientBuilder (fp, pi) =
         Client
           { clientOperationId = o ^. operationId . _Just,
             templatedFilePath = fp,
-            returnType = ""
+            returnType = "",
+            paramsInPath = []
           }
     )
     (catMaybes operations)
@@ -47,15 +49,15 @@ clientBuilder (fp, pi) =
     --selector :: ToJSON a => Reader a (HttpAction a)
     selector = undefined
 
-processFilePath :: FilePath -> [Referenced Param] -> String
-processFilePath fp params = unlines . map show $ pathParams
-  where
-    -- TODO. We are missing params that are referenced
-    pathParams = params ^.. traverse . _Inline . filteredBy (in_ . filtered (== ParamPath))
+builder ::  OpenApi ->  [Text]
+builder oa = concatMap (runReader extractor) pathItems
+  where 
+    pathItems = oa ^@.. paths . hashMap . itraversed
 
-getAllParams :: Lens' PathItem (Maybe Operation) -> Reader PathItem [Referenced Param]
-getAllParams op = do
-  piParams <- view parameters
-  magnify (op . _Just . parameters) $ do
-    opParams <- ask
-    return $ piParams <> opParams
+    extractor :: Reader (FilePath, PathItem) [Text]
+    extractor = do 
+      (fp, pi) <- ask
+      getRes <- magnify (_2 . get) $ do 
+        return ["Hoolas"]
+      magnify (_2 . get) $ do 
+        return $ getRes <> ["Hoolas Segundas"]

@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.4.
+-- This file has been generated from package.yaml by hpack version 0.35.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -25,6 +25,7 @@ library
   exposed-modules:
       Checkrail
       Checkrail.Client
+      Checkrail.Extractor
       Checkrail.Purescript
       Checkrail.Purescript.Render
   other-modules:
@@ -156,6 +157,7 @@ test-suite checkrail-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Checkrail.ExtractorSpec
       Checkrail.Purescript.RenderSpec
       Paths_checkrail
   hs-source-dirs:

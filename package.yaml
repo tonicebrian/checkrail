@@ -109,6 +109,7 @@ tests:
     source-dirs: test
     dependencies:
       - checkrail
+      - either
       - sydtest
       - sydtest-discover
 

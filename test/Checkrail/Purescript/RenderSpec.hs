@@ -11,7 +11,8 @@ petStoreClient =
   Client
     { clientOperationId = "findPetsByStatus",
       templatedFilePath = "",
-      returnType = "FindPetsByStatusResponse"
+      returnType = "FindPetsByStatusResponse",
+      paramsInPath = []
     }
 
 spec :: Spec

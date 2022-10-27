@@ -12,6 +12,7 @@ renderSignature Client {..} =
   [st|#{clientOperationId} :: MonadAff m => String -> String -> m #{returnType}|]
 
 renderFunctionAndParams Client {..} =
-  [st|#{clientOperationId} |]
+  [st|#{clientOperationId} $forall param <- params
+      name param|]
 
 renderClient = renderSignature
