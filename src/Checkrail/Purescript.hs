@@ -2,19 +2,14 @@
 
 module Checkrail.Purescript (generatePurescript, builder) where
 
-import Checkrail.Client
+import Checkrail.Extractor
 import Checkrail.Purescript.Render
 import Control.Lens
-import Control.Monad (sequence)
 import Control.Monad.Reader
-import Data.Aeson
 import Data.HashMap.Strict.InsOrd (hashMap)
-import Data.Maybe
 import Data.OpenApi
 import Data.Text (Text)
-import qualified Data.Text as T
 import qualified Data.Text.IO as T
-import Data.Typeable (typeOf)
 import Text.Pretty.Simple
 import Prelude
 
@@ -34,8 +29,7 @@ builder oa = concat $ concatMap (runReader extractor) pathItems
       (fp, pi) <- ask
       piParams <- view (_2 . parameters)
       let operations = [get, put, post, delete]
-      forM operations $ \op ->
-        magnify (_2 . op . _Just) $ do
+      forM operations $ \httpOp ->
+        magnify (_2 . httpOp . _Just) $ do
           opParams <- view parameters
-          -- let pathParams = (piParams <> opParams) ^.. folded . in_ . filtered (== ParamPath)
-          return ["Hola"]
+          return [renderParamsPathSignature (extractUrlParamTypes oa (piParams <> opParams))]

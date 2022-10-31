@@ -159,6 +159,7 @@ test-suite checkrail-test
   other-modules:
       Checkrail.ExtractorSpec
       Checkrail.Purescript.RenderSpec
+      Checkrail.Utils
       Paths_checkrail
   hs-source-dirs:
       test

@@ -10,22 +10,19 @@ import qualified Data.Text as T
 import Text.Shakespeare.Text
 import Prelude
 
-renderSignature Client {..} =
-  [st|#{clientOperationId} :: MonadAff m => String -> String -> m #{returnType}|]
+renderSignature :: Text -> [(OpenApiType, Bool)] -> Text -> Text
+renderSignature cOperationId cParams returnType =
+  [st|#{cOperationId} :: MonadAff m => #{renderParamsPathSignature cParams} -> m #{returnType}|]
 
-renderFunctionAndParams Client {..} =
-  [st|#{clientOperationId} $forall param <- params
-      name param|]
-
-renderClient = renderSignature
-
-renderParams :: [Param] -> Text
-renderParams params = T.pack . show $ params ^.. traversed . schema . _Just . _Inline . type_ . _Just . to renderType
+renderParamsPathSignature :: [(OpenApiType, Bool)] -> Text
+renderParamsPathSignature params = T.intercalate " -> " (map renderType params)
   where
-    renderType :: OpenApiType -> Text
-    renderType = \case
-      OpenApiString -> "String"
-      OpenApiNumber -> "Number"
-      OpenApiInteger -> "Int"
-      OpenApiBoolean -> "Boolean"
-      other -> error "Invalid type in a param. Can't generate code"
+    renderType :: (OpenApiType, Bool) -> Text
+    renderType (kind, isRequired) = (if isRequired then "" else "Maybe ") <> mapTypes kind
+      where
+        mapTypes = \case
+          OpenApiString -> "String"
+          OpenApiNumber -> "Number"
+          OpenApiInteger -> "Int"
+          OpenApiBoolean -> "Boolean"
+          other -> error "Invalid type in a param. Can't generate code"
