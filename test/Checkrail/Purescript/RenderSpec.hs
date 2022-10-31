@@ -3,24 +3,18 @@ module Checkrail.Purescript.RenderSpec where
 
 import Checkrail.Client
 import Checkrail.Purescript.Render
+import Data.Either.Combinators
+import Data.OpenApi
+import Data.Yaml as Yaml
 import Test.Syd
 import Prelude
 
-petStoreClient :: Client
-petStoreClient =
-  Client
-    { clientOperationId = "findPetsByStatus",
-      templatedFilePath = "",
-      returnType = "FindPetsByStatusResponse",
-      paramsInPath = []
-    }
+readOpenApi :: IO OpenApi
+readOpenApi = do
+  eitherOpenapi <- Yaml.decodeFileEither "test/resources/simple-petstore.yaml" :: IO (Either Yaml.ParseException OpenApi)
+  return (fromRight' eitherOpenapi)
 
 spec :: Spec
-spec = describe "When rendering an endpoint client" $ do
-  it "we get a valid header" $ do
-    renderSignature petStoreClient
-      `shouldBe` "findPetsByStatus :: MonadAff m => String -> m FindPetsByStatusResponse"
-
-  it "gets proper parameter names with the signature" $ do
-    renderFunctionAndParams petStoreClient
-      `shouldBe` "findPetsByStatus status"
+spec = beforeAll readOpenApi $ do
+  describe "When rendering an endpoint client" $ do
+    pending "we get all"
