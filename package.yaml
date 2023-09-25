@@ -33,7 +33,6 @@ dependencies:
   - yaml
 
 default-extensions:
-  # Recommended by RIO
   - BangPatterns
   - BinaryLiterals
   - ConstraintKinds
@@ -52,6 +51,7 @@ default-extensions:
   - FunctionalDependencies
   - GADTs
   - GeneralizedNewtypeDeriving
+  - ImportQualifiedPost
   - InstanceSigs
   - KindSignatures
   - LambdaCase
@@ -76,6 +76,7 @@ default-extensions:
 
 ghc-options:
   - -Wall
+  - -Werror
   - -Wcompat
   - -Widentities
   - -Wincomplete-record-updates

@@ -2,11 +2,9 @@
 
 module Checkrail.Purescript.Render where
 
-import Checkrail.Client
-import Control.Lens
 import Data.OpenApi
 import Data.Text (Text)
-import qualified Data.Text as T
+import Data.Text qualified as T
 import Text.Shakespeare.Text
 import Prelude
 
@@ -25,4 +23,4 @@ renderParamsPathSignature params = T.intercalate " -> " (map renderType params)
           OpenApiNumber -> "Number"
           OpenApiInteger -> "Int"
           OpenApiBoolean -> "Boolean"
-          other -> error "Invalid type in a param. Can't generate code"
+          _ -> error "Invalid type in a param. Can't generate code"

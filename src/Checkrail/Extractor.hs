@@ -1,10 +1,24 @@
 -- | Helper module to assemble cohesive pieces of information from OpenApi
 module Checkrail.Extractor where
 
+-- Comented so we can start easy
+--  ( mkClient,
+--    mkServer,
+--  )
+
+import Checkrail.Client
 import Control.Lens
+import Control.Monad.Reader
 import Data.Maybe
 import Data.OpenApi
+import Data.Text as T
 import Prelude
+
+mkClient :: OpenApi -> Client
+mkClient = undefined
+
+mkServer :: OpenApi -> Server
+mkServer = undefined
 
 class Monoid a => HasDefinitions a where
   definitionsL :: Lens' Components (Definitions a)
@@ -34,3 +48,10 @@ extractUrlParamTypes oa params =
         ^.. folded
           . to (getReferenced oa)
           . filteredBy (in_ . filtered (\pt -> pt == ParamPath || pt == ParamQuery))
+
+componentExtractor :: Reader Components [[Text]]
+componentExtractor = do
+  magnify schemas processSchema
+
+processSchema :: Reader (Definitions Schema) [[Text]]
+processSchema = return []
