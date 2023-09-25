@@ -6,7 +6,7 @@ module Checkrail.Extractor where
 --    mkServer,
 --  )
 
-import Checkrail.Client
+import Checkrail.Client as C
 import Control.Lens
 import Control.Monad.Reader
 import Data.Maybe
@@ -15,7 +15,9 @@ import Data.Text as T
 import Prelude
 
 mkClient :: OpenApi -> Client
-mkClient = undefined
+mkClient oa = fmap (\(k, _) -> C.Operation (T.pack k)) apiPaths
+  where
+    apiPaths = oa ^@.. paths . itraversed
 
 mkServer :: OpenApi -> Server
 mkServer = undefined

@@ -1,7 +1,6 @@
 module Checkrail.Client where
 
 import Data.Text
-import System.FilePath
 import Prelude
 
 data PathSegment
@@ -20,10 +19,9 @@ data PathParam = PathParam
   }
   deriving (Show, Eq)
 
-data Client = Client
-  { clientOperationId :: !Text,
-    templatedFilePath :: !FilePath,
-    returnType :: !Text,
-    paramsInPath :: ![PathParam]
+data Operation = Operation
+  { clientOperationId :: !Text
   }
-  deriving (Show)
+  deriving (Show, Eq)
+
+type Client = [Operation]
