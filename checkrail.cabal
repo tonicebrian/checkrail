@@ -27,7 +27,6 @@ library
       Checkrail.Client
       Checkrail.Extractor
       Checkrail.Purescript
-      Checkrail.Purescript.Render
   other-modules:
       Paths_checkrail
   hs-source-dirs:
