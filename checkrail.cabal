@@ -160,6 +160,7 @@ test-suite checkrail-test
   main-is: Spec.hs
   other-modules:
       Checkrail.ExtractorSpec
+      Checkrail.Fixture
       Checkrail.Purescript.RenderSpec
       Checkrail.Utils
       Paths_checkrail

@@ -1,12 +1,12 @@
 {-# LANGUAGE PartialTypeSignatures #-}
 
-module Checkrail.Purescript (generatePurescript) where
+module Checkrail.Purescript (generatePurescriptClient) where
 
 import Checkrail.Client
-import Prelude
+import Data.Text as T
 
-generatePurescript :: Client -> IO ()
-generatePurescript = undefined -- mapM_ T.putStrLn . builder
+generatePurescriptClient :: Client -> Text
+generatePurescriptClient _ = ""
 
 -- builder :: Client -> [Text]
 -- builder oa = concat $ concatMap (runReader extractor) pathItems

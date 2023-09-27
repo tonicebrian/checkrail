@@ -2,11 +2,12 @@ module Checkrail where
 
 import Checkrail.Client
 import Checkrail.Extractor
-import Checkrail.Purescript
+import Checkrail.Purescript (generatePurescriptClient)
 import Control.Lens
 import Data.Aeson qualified as Aeson
 import Data.Either.Combinators (eitherToError, mapLeft)
 import Data.OpenApi
+import Data.Text.IO as T
 import Data.Yaml qualified as Yaml
 import System.FilePath
 import Prelude
@@ -35,7 +36,7 @@ generate openApiFile fileFormat lang = do
   let client = mkClient openApi
   case lang of
     Haskell -> generateHaskell client
-    Purescript -> generatePurescript client
+    Purescript -> T.putStrLn (generatePurescriptClient client)
 
 generateHaskell :: Client -> IO ()
 generateHaskell _ = error "Not implemented yet"
