@@ -1,3 +1,5 @@
+{-# LANGUAGE DuplicateRecordFields #-}
+
 module Checkrail.Client where
 
 import Data.Text
@@ -26,8 +28,18 @@ data Operation = Operation
 
 type ModuleName = Text
 
+data Field = Field
+  { name :: Text,
+    required :: Bool
+  }
+  deriving (Show, Eq)
+
+newtype Definition = Definition Field
+  deriving (Show, Eq)
+
 data Client = Client
   { moduleName :: ModuleName,
-    operations :: [Operation]
+    operations :: [Operation],
+    definitions :: [Definition]
   }
   deriving (Show, Eq)

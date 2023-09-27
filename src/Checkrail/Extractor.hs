@@ -15,8 +15,10 @@ import Data.Text as T
 import Prelude
 
 mkClient :: ModuleName -> OpenApi -> Client
-mkClient mn oa = Client mn (fmap (\(k, _) -> C.Operation (T.pack k)) apiPaths)
+mkClient mn oa = Client mn operations definitions
   where
+    operations = fmap (\(k, _) -> C.Operation (T.pack k)) apiPaths
+    definitions = []
     apiPaths = oa ^@.. paths . itraversed
 
 mkServer :: OpenApi -> Server

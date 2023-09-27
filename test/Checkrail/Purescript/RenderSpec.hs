@@ -8,5 +8,5 @@ import Prelude
 spec :: Spec
 spec = describe "When rendering a client" $ do
   it "we get the right code output" $ do
-    let obtained = generatePurescriptClient moduleName theClient
+    let obtained = generatePurescriptClient theModuleName theClient
     pureGoldenTextFile "test/resources/purescript/src/SimplePetStore.purs" obtained

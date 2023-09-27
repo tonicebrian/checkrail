@@ -1,10 +1,14 @@
-module Checkrail.Fixture where
+module Checkrail.Fixture
+  ( theClient,
+    theModuleName,
+  )
+where
 
 import Checkrail.Client
 import Data.Text as T
 
-theClient :: Client
-theClient = Client "SimplePetStore" [Operation "/pet/findByStatus"]
+theModuleName :: Text
+theModuleName = "SimplePetStore"
 
-moduleName :: Text
-moduleName = "SimplePetStore"
+theClient :: Client
+theClient = Client theModuleName [Operation "/pet/findByStatus"] []
