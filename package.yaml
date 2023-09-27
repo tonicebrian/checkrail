@@ -20,6 +20,7 @@ description: Please see the README on Github at <https://github.com/tonicebrian/
 dependencies:
   - aeson
   - base
+  - casing
   - either
   - filepath
   - insert-ordered-containers

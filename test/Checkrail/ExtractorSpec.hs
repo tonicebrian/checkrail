@@ -10,4 +10,4 @@ spec :: Spec
 spec = beforeAll readOpenApi $ do
   describe "Directly working on the OpenApi data structure" $ do
     itWithOuter "we can construct a client from the openapi file" $ \oa -> do
-      mkClient oa `shouldBe` theClient
+      mkClient moduleName oa `shouldBe` theClient

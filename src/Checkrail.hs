@@ -7,9 +7,11 @@ import Control.Lens
 import Data.Aeson qualified as Aeson
 import Data.Either.Combinators (eitherToError, mapLeft)
 import Data.OpenApi
+import Data.Text as T
 import Data.Text.IO as T
 import Data.Yaml qualified as Yaml
 import System.FilePath
+import Text.Casing (pascal)
 import Prelude
 
 data FileFormat
@@ -33,10 +35,12 @@ generate openApiFile fileFormat lang = do
     JSON -> (Aeson.eitherDecodeFileStrict openApiFile :: IO (Either String OpenApi))
     Yaml -> (Yaml.decodeFileEither openApiFile :: IO (Either Yaml.ParseException OpenApi)) <&> mapLeft show
   openApi <- eitherToError (mapLeft userError parsedOpenApi)
-  let client = mkClient openApi
+  let moduleName :: Text
+      moduleName = T.pack (pascal openApiFile)
+      client = mkClient moduleName openApi
   case lang of
     Haskell -> generateHaskell client
-    Purescript -> T.putStrLn (generatePurescriptClient client)
+    Purescript -> T.putStrLn (generatePurescriptClient moduleName client)
 
 generateHaskell :: Client -> IO ()
 generateHaskell _ = error "Not implemented yet"

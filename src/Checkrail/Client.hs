@@ -24,4 +24,10 @@ data Operation = Operation
   }
   deriving (Show, Eq)
 
-type Client = [Operation]
+type ModuleName = Text
+
+data Client = Client
+  { moduleName :: ModuleName,
+    operations :: [Operation]
+  }
+  deriving (Show, Eq)
