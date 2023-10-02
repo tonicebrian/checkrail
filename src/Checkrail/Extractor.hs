@@ -18,11 +18,28 @@ mkClient :: ModuleName -> OpenApi -> Client
 mkClient mn oa = Client mn operations definitions
   where
     operations = fmap (\(k, _) -> C.Operation (T.pack k)) apiPaths
-    definitions = []
     apiPaths = oa ^@.. paths . itraversed
+
+    -- Definitions
+    -- definitions = runReader extractDefinitions (oa ^. components)
+
+    definitions = do
+      (t, s) <- oa ^@.. components . schemas . itraversed . ifiltered (\t _ -> t == "Tag")
+      return $ C.Definition t (extractFields s)
 
 mkServer :: OpenApi -> Server
 mkServer = undefined
+
+extractFields :: Schema -> [Field]
+extractFields s = do
+  (fieldName, _) <- s ^@.. properties . itraversed
+  return $ Field fieldName False
+
+extractDefinitions :: Reader Components [C.Definition]
+extractDefinitions = do
+  magnify (schemas . traversed) $ do
+    _ <- ask
+    return [C.Definition "foo" mempty]
 
 class Monoid a => HasDefinitions a where
   definitionsL :: Lens' Components (Definitions a)

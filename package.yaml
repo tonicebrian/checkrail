@@ -21,6 +21,7 @@ dependencies:
   - aeson
   - base
   - casing
+  - containers
   - either
   - filepath
   - insert-ordered-containers

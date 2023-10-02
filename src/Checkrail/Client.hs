@@ -34,7 +34,10 @@ data Field = Field
   }
   deriving (Show, Eq)
 
-newtype Definition = Definition Field
+data Definition = Definition
+  { name :: Text,
+    fields :: [Field]
+  }
   deriving (Show, Eq)
 
 data Client = Client
