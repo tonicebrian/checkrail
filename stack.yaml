@@ -39,7 +39,13 @@ packages:
 # - git: https://github.com/commercialhaskell/stack.git
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
-# extra-deps: []
+extra-deps:
+  - git: https://github.com/brendanhay/ede.git
+    commit: 041ef0b8bc273eb16da167716bc60337d7fcfaa1
+  - aeson-2.2.3.0
+  - attoparsec-aeson-2.2.2.0
+  - character-ps-0.1
+  - hashable-1.4.7.0
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

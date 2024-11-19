@@ -1,12 +1,17 @@
--- |
-module Checkrail.Utils where
+module Checkrail.Utils (pureGoldenTextFile) where
 
-import Data.Either.Combinators (fromRight')
-import Data.OpenApi
-import Data.Yaml as Yaml
-import Prelude
+import Data.Text.IO as TIO
+import Relude
+import Test.Hspec.Golden
 
-readOpenApi :: IO OpenApi
-readOpenApi = do
-  eitherOpenapi <- Yaml.decodeFileEither "test/resources/simple-petstore.yaml" :: IO (Either Yaml.ParseException OpenApi)
-  return (fromRight' eitherOpenapi)
+pureGoldenTextFile :: FilePath -> Text -> Golden Text
+pureGoldenTextFile name expected =
+  Golden
+    { output = expected,
+      encodePretty = show,
+      writeToFile = TIO.writeFile,
+      readFromFile = TIO.readFile,
+      goldenFile = "test/resources/golden/" <> name,
+      actualFile = Just ("test/resources/golden/" <> name),
+      failFirstTime = False
+    }

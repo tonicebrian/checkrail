@@ -20,4 +20,4 @@ TBD
 ## Support me
 
 I work as a Freelancer so I will be more than happy helping you to use this library, adapting it to your needs or adding
-that missing functionality you are longing for. Just [https://github.com/tonicebrian](contact me).
+that missing functionality you are longing for. Just [contact me](https://github.com/tonicebrian).

@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.35.1.
+-- This file has been generated from package.yaml by hpack version 0.37.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -78,6 +78,7 @@ library
     , base
     , casing
     , containers
+    , ede
     , either
     , filepath
     , insert-ordered-containers
@@ -86,6 +87,7 @@ library
     , openapi3
     , optparse-simple
     , pretty-simple
+    , relude
     , shakespeare
     , text
     , yaml
@@ -145,6 +147,7 @@ executable checkrail-exe
     , casing
     , checkrail
     , containers
+    , ede
     , either
     , filepath
     , insert-ordered-containers
@@ -153,6 +156,7 @@ executable checkrail-exe
     , openapi3
     , optparse-simple
     , pretty-simple
+    , relude
     , shakespeare
     , text
     , yaml
@@ -217,17 +221,20 @@ test-suite checkrail-test
     , casing
     , checkrail
     , containers
+    , ede
     , either
     , filepath
+    , hspec
+    , hspec-discover
+    , hspec-golden
     , insert-ordered-containers
     , lens
     , mtl
     , openapi3
     , optparse-simple
     , pretty-simple
+    , relude
     , shakespeare
-    , sydtest
-    , sydtest-discover
     , text
     , yaml
   default-language: Haskell2010

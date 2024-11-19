@@ -1,1 +1,1 @@
-{-# OPTIONS_GHC -F -pgmF sydtest-discover #-}
+{-# OPTIONS_GHC -F -pgmF hspec-discover #-}

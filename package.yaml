@@ -22,6 +22,7 @@ dependencies:
   - base
   - casing
   - containers
+  - ede
   - either
   - filepath
   - insert-ordered-containers
@@ -30,6 +31,7 @@ dependencies:
   - optparse-simple
   - openapi3
   - pretty-simple
+  - relude
   - shakespeare
   - text
   - yaml
@@ -100,6 +102,7 @@ executables:
       - optparse-simple
       - pretty-simple
       - text
+      - relude
 
     ghc-options:
       - -threaded
@@ -113,8 +116,10 @@ tests:
     dependencies:
       - checkrail
       - either
-      - sydtest
-      - sydtest-discover
+      - hspec
+      - hspec-discover
+      - hspec-golden
+      - relude
 
     ghc-options:
       - -threaded

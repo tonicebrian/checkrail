@@ -23,3 +23,6 @@ cabal.project.local~
 .HTF/
 .ghc.environment.*
 output/
+
+# Purescript
+.psc-ide-port
