@@ -1,4 +1,4 @@
-module Checkrail.Utils (pureGoldenTextFile) where
+module Checkrail.Utils (pureGoldenTextFile, goldenTextFile) where
 
 import Data.Text.IO as TIO
 import Relude
@@ -11,7 +11,10 @@ pureGoldenTextFile name expected =
       encodePretty = show,
       writeToFile = TIO.writeFile,
       readFromFile = TIO.readFile,
-      goldenFile = "test/resources/golden/" <> name,
+      goldenFile = "test/resources/purescript/src/" <> name,
       actualFile = Just ("test/resources/golden/" <> name),
       failFirstTime = False
     }
+
+goldenTextFile :: FilePath -> IO Text -> IO (Golden Text)
+goldenTextFile name readIO = readIO >>= pure . pureGoldenTextFile name

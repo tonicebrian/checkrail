@@ -1,28 +1,22 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE QuasiQuotes #-}
 
 module Checkrail.Purescript (generatePurescriptClient) where
 
 import Checkrail.Client
-import Data.Text as T
-import Text.Shakespeare.Text
+import Relude
+import Text.EDE
 
-generatePurescriptClient :: ModuleName -> Client -> Text
-generatePurescriptClient mn _ =
-  T.intercalate
-    "\n"
-    [ renderModule mn,
-      renderImports,
-      "-- EOF",
-      ""
-    ]
-
-renderModule :: Text -> Text
-renderModule moduleName =
-  [st|module #{moduleName} where|]
-
-renderImports :: Text
-renderImports =
-  [st|
-import Prelude
-|]
+generatePurescriptClient :: ModuleName -> Client -> IO Text
+generatePurescriptClient mn _ = do
+  r <- eitherParseFile "src/Checkrail/Purescript/client.ede"
+  either (error . toText) (pure . toText) $ r >>= (`eitherRender` env)
+  where
+    env =
+      fromPairs
+        [ "moduleName" .= mn,
+          "imports"
+            .= fromPairs
+              [ "import1" .= ("foo" :: String),
+                "import2" .= ("bar" :: String)
+              ]
+        ]

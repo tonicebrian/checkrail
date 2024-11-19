@@ -40,7 +40,7 @@ generate openApiFile fileFormat lang = do
       client = mkClient moduleName openApi
   case lang of
     Haskell -> generateHaskell client
-    Purescript -> T.putStrLn (generatePurescriptClient moduleName client)
+    Purescript -> generatePurescriptClient moduleName client >>= T.putStrLn
 
 generateHaskell :: Client -> IO ()
 generateHaskell _ = error "Not implemented yet"

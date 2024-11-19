@@ -32,8 +32,6 @@ dependencies:
   - openapi3
   - pretty-simple
   - relude
-  - shakespeare
-  - text
   - yaml
 
 default-extensions:
