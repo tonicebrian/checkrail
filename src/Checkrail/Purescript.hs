@@ -13,10 +13,5 @@ generatePurescriptClient mn _ = do
   where
     env =
       fromPairs
-        [ "moduleName" .= mn,
-          "imports"
-            .= fromPairs
-              [ "import1" .= ("foo" :: String),
-                "import2" .= ("bar" :: String)
-              ]
+        [ "moduleName" .= mn
         ]

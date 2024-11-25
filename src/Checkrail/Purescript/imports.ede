@@ -1,4 +1,1 @@
 import Prelude
-{% for import in imports %}
-{{ import.key }}
-{% endfor %}
