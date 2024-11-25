@@ -1,6 +1,9 @@
 package:
   name: purescript
   dependencies:
+    - affjax 
+    - argonaut
+    - argonaut-codecs
     - console
     - effect
     - prelude
